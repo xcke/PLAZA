@@ -18,6 +18,9 @@ app.config.from_object(env_settings['PLAZA_SETTINGS'])
 from scripts_bank.vmware.get_vmrc_links.get_vmrc_links import get_vmrc_links_bp
 app.register_blueprint(get_vmrc_links_bp, url_prefix='/vmware')
 
+from scripts_bank.python.hello_world.hello_world import hello_world_bp
+app.register_blueprint(hello_world_bp, url_prefix='/python')
+
 from scripts_bank._5620sam.sam_xml_api_tester.sam_xml_api_tester import sam_api_tester_bp
 app.register_blueprint(sam_api_tester_bp, url_prefix='/5620sam')
 
@@ -29,6 +32,6 @@ def index():
 if __name__ == '__main__':
     # if we are in Prod, use HOST and PORT specified
     try:
-        app.run(host=str(env_settings['HOST']), port=80)
+        app.run(host=str(env_settings['HOST']), port=5000)
     except config.ConfigurationError:
         app.run()
