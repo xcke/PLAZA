@@ -2,8 +2,21 @@ from flask import render_template, request, Blueprint, jsonify
 
 # define dict to store information collected from VMs and 'error' messages if any
 # this dict will be served to AJAX request as response
-hello_world_links = {'return_messge':'Hello World',
+hello_world_links = {'return_message':'',
               'error':''}
+
+def main(args):
+    """
+   Simple command-line program for listing the virtual machines on a system.
+   """
+    resp = dict()
+    message = args['message']
+    print("My message is: {}".format(message))
+    resp['error'] = ""
+    resp['return_message'] = message + 'Hello World'
+
+    print(resp)
+    return resp
 
 ###############
 #### FLASK ####
@@ -22,11 +35,5 @@ def hello_world():
     elif request.method == 'POST':
         print(request.form)
         hello_world_args = {'message': request.form['message']}
-
-        global vmrc_links
-        vmrc_links = {'collected_vm_info': '',
-                      'error': ''}
-
-        # TODO: RD: add connection timeout for vm engine. Its too long in case of netw unreach.
-        vm_info = main(getvmrc_args)
-        return jsonify(vm_info)
+        return_message = main(hello_world_args)
+        return jsonify(return_message)

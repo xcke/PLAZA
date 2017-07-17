@@ -39,6 +39,19 @@ xcke
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Inputs</h3>
+                                        <!-- FORM -->
+                    <form data-toggle="validator" role="form" method="post"> <!-- validation form http://1000hz.github.io/bootstrap-validator/ -->
+                        <label class="control-label requiredField" for="message">
+                                Please provide a message!
+                        </label>
+                        <textarea class="form-control" rows="3" placeholder="What's up?" id="message" name="message" required></textarea>
+                            <div class="help-block with-errors">
+                            </div>
+                        <button class="btn btn-primary" id="submit_form" name="submit" type="button">
+                            Submit
+                        </button>
+                    </form>
+
                 </div>
                 <div class="panel-body">
                 </div>
@@ -48,7 +61,12 @@ xcke
                 <div class="panel-heading">
                     <h3 class="panel-title">Output</h3>
                 </div>
-                <div class="panel-body" id="output_div">
+                <div class="panel-body">
+                    <textarea class="form-control" rows="3" placeholder="What's up?" id="output_div">
+
+                    </textarea>
+                            <div class="help-block with-errors">
+                            </div>
                 </div>
             </div>
         </div>
@@ -56,5 +74,5 @@ xcke
 </div>
 {% endblock %}
 {% block added_js %}
-<!-- nothing here for the moment -->
+<script src="{{ url_for('hello_world.static', filename='hello_world.js') }}"></script>
 {% endblock %}
